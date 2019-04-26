@@ -12,9 +12,17 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+/*################## Begin admin routes #################*/
+Route::prefix('admin')->group(function () {
+	// Dashboard routes
+   Route::get('/dashboard', 'Admin\DashboardController@index')->name('admin.dashboard');  # home controler je preimenovan u admin\dashboard
+   // Post routes
+   Route::resource('posts', 'Admin\PostController');
+});
+/*################## End admin routes #################*/
+

@@ -9,15 +9,15 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-
-    <!-- Fonts -->
+      <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
 
-    <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+	<!-- Bootstrap core CSS -->
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    
 </head>
 <body>
     <div id="app">
@@ -31,9 +31,11 @@
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
+                    <!-- Left Side Of Navbar ######## DODANO NAKNADNO ##########-->
                     <ul class="navbar-nav mr-auto">
-
+						 <li class="nav-item">  
+                             <a class="nav-link" href="{{ route('posts.index') }}">{{ __('Posts') }}</a>
+                         </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -73,8 +75,25 @@
         </nav>
 
         <main class="py-4">
+		
+			@includeWhen($notifications, 'includes.notifications')
+			
             @yield('content')
+			
         </main>
     </div>
+	<!-- JQuery -->
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<!-- Bootstrap tooltips -->
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+	<!-- Bootstrap core JavaScript -->
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	@stack('scripts')
+	
+		<script>
+			$(document).ready(function(){
+				@stack('script')
+			});
+	</script>
 </body>
 </html>
